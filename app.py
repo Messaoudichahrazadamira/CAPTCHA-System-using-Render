@@ -11,7 +11,7 @@ import os
 load_dotenv()
 
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
-app = Flask(name)
+app = Flask(__name__)
 CORS(app)
 
 current_captcha_answer = ""
@@ -69,7 +69,12 @@ def verify_captcha():
         return jsonify({"status": "verified", "code": 200})
     return jsonify({"status": "failed", "reason": "Incorrect text"}), 401
 
-if name == "main":
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print("🚀 Captcha Service Running...")
     app.run(host='0.0.0.0', port=port)
+    
+    
+    
+    
+    
